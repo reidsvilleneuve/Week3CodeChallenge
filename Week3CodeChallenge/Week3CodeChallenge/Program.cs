@@ -23,8 +23,11 @@ namespace Week3CodeChallenge
             Console.WriteLine(" (Calculated in {0} ms.)\n", timeTester.ElapsedMilliseconds);
 
             //LongestCollatzSequence(Longest Chain).
+            timeTester = Stopwatch.StartNew();
+            Console.WriteLine("LongestCollatzSequence: {0} (Calculated in {1} ms.)\n",
+                LongestCollatzSequence(), timeTester.ElapsedMilliseconds);
 
-
+            Console.Write("Press any key to end. ");
             Console.ReadKey();
         }
 
@@ -82,6 +85,35 @@ namespace Week3CodeChallenge
                 .Sum(y => y));          //Total sum.
         }
 
-        //static int 
+        static int LongestCollatzSequence()
+        {
+            long calcNum = 0; // Number that will be manipulated.
+
+            int steps = 0; // Counts the number of times that a number goes though a calculation.
+            int maxSteps = 0; // Keeps track of the biggest amount of steps so far.
+            int maxOccurance = 0; // Records when the biggest step occurance happened.
+
+            for (int i = 1; i < 1000001; i++ ) //Finding biggest step count 
+            {
+                //Reset values
+                calcNum = i;
+                steps = 0;
+
+                while (calcNum > 1)
+                {
+                    steps++;
+                    if (calcNum % 2 == 0) calcNum = calcNum / 2;    //Number is even.
+                    else calcNum = (3 * calcNum) + 1;               //Number is odd.
+                }
+
+                if (maxSteps < steps)   //This iteration took more steps than previous ones.
+                {
+                    maxSteps = steps;   //Record step count and occurance time.
+                    maxOccurance = i;
+                }
+            }
+            
+            return maxOccurance;
+        }
     }
 }
