@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Week3CodeChallenge
 {
@@ -10,7 +11,19 @@ namespace Week3CodeChallenge
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(FindNPrimes(10));
+            //FindNPrimes(10001).
+            Stopwatch timeTester = Stopwatch.StartNew();
+            Console.WriteLine("FindNPrimes(10001): {0} (Calculated in {1} ms.)\n", 
+                FindNPrimes(10001), timeTester.ElapsedMilliseconds);
+
+            //EvenFibonacciSequencer(1000000). Project specifies that the function writes to the console.
+            Console.Write("EvenFibonacciSequencer(1000000): ");
+            timeTester = Stopwatch.StartNew();
+            EvenFibonacciSequencer(1000000);
+            Console.WriteLine(" (Calculated in {0} ms.)\n", timeTester.ElapsedMilliseconds);
+
+            //LongestCollatzSequence(Longest Chain).
+
 
             Console.ReadKey();
         }
@@ -18,52 +31,31 @@ namespace Week3CodeChallenge
         static int FindNPrimes(int maxPrime)
         {
             if (maxPrime == 1) return 2; // The only even prime number
-            if (maxPrime == 2) return 3; // This saves us 10001 x % y calculations as we no longer have to test for 3.
 
-            //These account for the above two returns.
-            int primeCount = 2; //Keeps track of how many primes we have found 
-            int numToTest = 5; //Number to test against. A counter.
-            int lastPrime = 3; //Will be returned when the correct number of primes have been found.
+            //These account for the above return.
+            int primeCount = 1; //Keeps track of how many primes we have found 
+            int numToTest = 3; //Number to test against. A counter.
+            int lastPrime = 2; //Will be returned when the correct number of primes have been found.
 
             bool isPrime = true; //Will be set to false if a divisible number is found.
-
-            List<int> primeTable = new List<int>() { 3 }; //Populated when prime numer is found, depeding on the
-                                                             //size of maxPrime.
 
             while (primeCount < maxPrime)
             {
                 double testTo = Math.Ceiling(Math.Sqrt(numToTest)); // Mathmatically, this is as far as we need to test.
 
-                if (testTo > 3) // If we can use our prime table...
+                for (int i = 3; i <= testTo; i++)
                 {
-                    foreach(int i in primeTable)
+                    if (numToTest % i == 0)
                     {
-                        if(numToTest % i == 0)
-                        {
-                            isPrime = false;
-                            break;
-                        }
+                        isPrime = false; //Non-prime deteted. No need to test any further numbers.
+                        break;
                     }
                 }
-                else // if our current numToTest is too small to use our table...
-                {
-                    for (int i = 3; i <= testTo; i++)
-                    {
-                        if (numToTest % i == 0)
-                        {
-                            isPrime = false;
-                            break;
-                        }
 
-                    }
-                }
-                if (isPrime)
+                if (isPrime) // This made it though the above loop with isPrime still true. It's a prime.
                 {
                     primeCount++;
-                    lastPrime = numToTest;
-
-                    if (lastPrime <= Math.Ceiling(Math.Sqrt(maxPrime)))
-                        primeTable.Add(lastPrime);
+                    lastPrime = numToTest; 
                 }
 
                 numToTest+=2; //Even numbers are not primes, so we iterate by 2.
@@ -71,8 +63,25 @@ namespace Week3CodeChallenge
             }
 
             return lastPrime;
-
-
         }
+
+        static void EvenFibonacciSequencer(int maxValue)
+        {
+            List<int> fibSequence = new List<int>() { 1, 2 }; //Start our table.
+            int nextNumber = 3; //Stores the next number to be added in the sequence.
+
+            while(nextNumber < maxValue)
+            {
+                fibSequence.Add(nextNumber);
+                nextNumber += fibSequence[fibSequence.Count - 2]; //This will be the next one that will be added
+            }                                                     //IF it's smaller than maxValue.
+            
+
+            Console.Write (fibSequence
+                .Where(x => x % 2 == 0) //Only even numbers.
+                .Sum(y => y));          //Total sum.
+        }
+
+        //static int 
     }
 }
