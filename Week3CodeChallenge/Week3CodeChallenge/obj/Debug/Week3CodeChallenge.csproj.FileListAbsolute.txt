@@ -1,1 +1,6 @@
 C:\Users\Reid\Documents\GitHub\Week3CodeChallenge\Week3CodeChallenge\Week3CodeChallenge\bin\Debug\Week3CodeChallenge.exe.config
+C:\Users\Reid\Documents\GitHub\Week3CodeChallenge\Week3CodeChallenge\Week3CodeChallenge\bin\Debug\Week3CodeChallenge.exe
+C:\Users\Reid\Documents\GitHub\Week3CodeChallenge\Week3CodeChallenge\Week3CodeChallenge\bin\Debug\Week3CodeChallenge.pdb
+C:\Users\Reid\Documents\GitHub\Week3CodeChallenge\Week3CodeChallenge\Week3CodeChallenge\obj\Debug\Week3CodeChallenge.csprojResolveAssemblyReference.cache
+C:\Users\Reid\Documents\GitHub\Week3CodeChallenge\Week3CodeChallenge\Week3CodeChallenge\obj\Debug\Week3CodeChallenge.exe
+C:\Users\Reid\Documents\GitHub\Week3CodeChallenge\Week3CodeChallenge\Week3CodeChallenge\obj\Debug\Week3CodeChallenge.pdb
